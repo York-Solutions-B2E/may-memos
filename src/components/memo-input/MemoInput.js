@@ -2,16 +2,20 @@ import {useState} from "react";
 
 export function MemoInput({onSubmit}) {
 
-    const [formState, setFormState] = useState({
+    const newMemo = {
+        id: new Date().getMilliseconds(),
         title: '',
         desc: '',
         date: new Date(),
         finished: false
-    });
+    }
+
+    const [formState, setFormState] = useState(newMemo);
 
     function onFormSubmit(event) {
         event.preventDefault()
         onSubmit({...formState})
+        setFormState(newMemo);
     }
 
     function onTitleChange(event) {
