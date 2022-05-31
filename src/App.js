@@ -40,13 +40,9 @@ function App(props) {
         setSelectedMemo(memo)
     }
 
-    function onMemoDelete(memoToDelete) {
+    function onDelete(memo) {
         setMemoList(
-            [
-                ...memoList.filter((memo) => {
-                    return memo.id !== memoToDelete.id
-                })
-            ]
+            memoList.filter(cMemo => cMemo.id !== memo.id)
         )
     }
 
@@ -60,7 +56,7 @@ function App(props) {
 
     return <>
         <_MemoAdd onMemoAdd={onMemoAdd}/>
-        <_MemoList list={memoList} onEditSelect={onEditSelect} onMemoDelete={onMemoDelete}/>
+        <_MemoList list={memoList} onEditSelect={onEditSelect} onDelete={onDelete}/>
     </>
 }
 

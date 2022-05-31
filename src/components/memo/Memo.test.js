@@ -76,21 +76,16 @@ test(
 )
 
 test(
-    'should run onMemoDelete prop when "Delete" button is clicked',
+    'should run onDelete prop passing memo data when "Delete" button is clicked',
     () => {
-
-        const memoData = {
-            title: 'title',
-            desc: 'desc',
-            date: new Date('2022-12-02'),
-            finished: true
+        const _onDelete = jest.fn();
+        const _memo = {
+            test: 'MOCK'
         }
-
-        const _onMemoDelete = jest.fn();
-        render(<Memo memo={memoData} onMemoDelete={_onMemoDelete}/>)
+        render(<Memo memo={_memo} onDelete={_onDelete}/>)
         const button = screen.getByText("Delete")
         userEvent.click(button);
 
-        expect(_onMemoDelete).toHaveBeenCalledWith(memoData)
+        expect(_onDelete).toHaveBeenCalledWith(_memo)
     }
 )
