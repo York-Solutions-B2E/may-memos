@@ -37,6 +37,12 @@ function App(props) {
         setSelectedMemo(memo)
     }
 
+    function onDelete(memo) {
+        setMemoList(
+            memoList.filter(cMemo => cMemo.id !== memo.id)
+        )
+    }
+
     if (!isLoggedIn) {
         return <_Login onSubmit={onLogin}/>
     }
@@ -47,7 +53,7 @@ function App(props) {
 
     return <>
         <_MemoAdd onMemoAdd={onMemoAdd}/>
-        <_MemoList list={memoList} onEditSelect={onEditSelect}/>
+        <_MemoList list={memoList} onEditSelect={onEditSelect} onDelete={onDelete}/>
     </>
 }
 

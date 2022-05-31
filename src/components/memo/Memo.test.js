@@ -65,3 +65,27 @@ test(
         expect(_onEditSelect).toHaveBeenCalledWith(memoData)
     }
 )
+
+test(
+    'should a button with the text "Delete"',
+    () => {
+        render(<Memo memo={{}}/>)
+        const button = screen.getByText("Delete")
+        expect(button.tagName).toBe("BUTTON")
+    }
+)
+
+test(
+    'should run onDelete prop passing memo data when "Delete" button is clicked',
+    () => {
+        const _onDelete = jest.fn();
+        const _memo = {
+            test: 'MOCK'
+        }
+        render(<Memo memo={_memo} onDelete={_onDelete}/>)
+        const button = screen.getByText("Delete")
+        userEvent.click(button);
+
+        expect(_onDelete).toHaveBeenCalledWith(_memo)
+    }
+)
