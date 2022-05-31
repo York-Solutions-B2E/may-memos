@@ -1,16 +1,22 @@
 import {useState} from "react";
+import {v4 as uuidv4} from 'uuid';
 
-export function MemoInput({onSubmit}) {
+export function MemoInput(props) {
 
     const newMemo = {
-        id: new Date().getMilliseconds(),
+        id: uuidv4(),
         title: '',
         desc: '',
         date: new Date(),
         finished: false
     }
 
-    const [formState, setFormState] = useState(newMemo);
+    const {
+        onSubmit,
+        memo = newMemo
+    } = props
+
+    const [formState, setFormState] = useState(memo);
 
     function onFormSubmit(event) {
         event.preventDefault()

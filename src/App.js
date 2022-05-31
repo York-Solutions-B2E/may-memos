@@ -3,6 +3,7 @@ import {useState} from "react";
 import {Login} from "./components/login/Login";
 import {MemoAdd} from "./components/memo-add/MemoAdd";
 import {MemoList} from "./components/memo-list/MemoList";
+import {MemoEdit} from "./components/memo-edit/MemoEdit";
 
 function App(props) {
 
@@ -12,8 +13,7 @@ function App(props) {
         _Login = Login,
         _MemoAdd = MemoAdd,
         _MemoList = MemoList,
-        // TODO - ADD DEFAULT COMP
-        _MemoEdit,
+        _MemoEdit = MemoEdit,
 
     } = props;
 
@@ -36,6 +36,10 @@ function App(props) {
         ])
     }
 
+    function onMemoEdit(memo) {
+        console.log(memo)
+    }
+
     function onEditSelect(memo) {
         setSelectedMemo(memo)
     }
@@ -55,7 +59,7 @@ function App(props) {
     }
 
     if (selectedMemo) {
-        return <_MemoEdit/>
+        return <_MemoEdit memo={selectedMemo} onSubmit={onMemoEdit}/>
     }
 
     return <>
