@@ -5,7 +5,7 @@ import {Memo} from "../memo/Memo";
 //     return <Memo memo={memoData}/>
 // })
 
-export function MemoList({list, onEditSelect, onMemoDelete, _Memo = Memo}) {
+export function MemoList({list, onEditSelect, onDelete, _Memo = Memo}) {
 
     function sortMemoList(a, b) {
         if (a.title < b.title) return -1;
@@ -20,12 +20,12 @@ export function MemoList({list, onEditSelect, onMemoDelete, _Memo = Memo}) {
         <h1>Pending</h1>
         {
             pendingList.sort(sortMemoList)
-            .map((memoData, idx) => <_Memo key={idx} memo={memoData} onEditSelect={onEditSelect} onMemoDelete={onMemoDelete}/>)
+            .map((memoData, idx) => <_Memo key={idx} memo={memoData} onEditSelect={onEditSelect} onDelete={onDelete}/>)
         }
         <h1>Finished</h1>
         {
             finishedList.sort(sortMemoList)
-                .map((memoData, idx) => <_Memo key={idx} memo={memoData} onEditSelect={onEditSelect} onMemoDelete={onMemoDelete}/>)
+                .map((memoData, idx) => <_Memo key={idx} memo={memoData} onEditSelect={onEditSelect} onDelete={onDelete}/>)
         }
     </>
 }
