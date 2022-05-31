@@ -5,6 +5,7 @@ import {MemoAdd} from "./components/memo-add/MemoAdd";
 import {MemoList} from "./components/memo-list/MemoList";
 
 function App(props) {
+
     const {
         _isLoggedIn = false,
         _selectedMemo = null,
@@ -19,6 +20,8 @@ function App(props) {
     const [isLoggedIn, setIsLoggedIn] = useState(_isLoggedIn)
     const [memoList, setMemoList] = useState([])
     const [selectedMemo, setSelectedMemo] = useState(_selectedMemo);
+
+    console.log(memoList)
 
     function onLogin(creds) {
         if (creds.username === 'admin' && creds.password === 'pass') {
