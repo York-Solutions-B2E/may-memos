@@ -38,6 +38,18 @@ test('should show a input with type checkbox', () => {
     expect(input.tagName).toBe('INPUT');
 })
 
+test('should set the finished checkbox check property to the correct value (true)', () => {
+    render(<MemoInput memo={{finished: true}}/>)
+    const input = screen.getByRole('checkbox');
+    expect(input).toHaveProperty('checked', true)
+})
+
+test('should set the finished checkbox check property to the correct value (false)', () => {
+    render(<MemoInput memo={{finished: false}}/>)
+    const input = screen.getByRole('checkbox');
+    expect(input).toHaveProperty('checked', false)
+})
+
 test('should show a button with text "Submit"', () => {
     render(<MemoInput/>)
     const button = screen.getByText("Submit");
