@@ -1,16 +1,22 @@
 import {useState} from "react";
 import {Button, Card, Form} from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {ON_LOGIN} from "../../modules/memos";
 
-export function Login({onSubmit}) {
+export function Login() {
 
+    const dispatch = useDispatch();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     function onFormSubmit(event) {
         event.preventDefault();
-        onSubmit({
-            username,
-            password
+        dispatch({
+            type: ON_LOGIN,
+            creds: {
+                username,
+                password
+            }
         })
     }
 
