@@ -7,6 +7,7 @@ import App from './App';
 import {Provider} from "react-redux";
 import {applyMiddleware, compose, createStore} from "redux";
 
+// testing push
 import {reducer} from './modules/memos'
 
 // Goal for today is to connect this front end to a back end
