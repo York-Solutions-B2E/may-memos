@@ -86,12 +86,14 @@ export function initiateLogin(creds) {
 
         // 5 second timeout:
         const timeoutId = setTimeout(() => controller.abort(), 5000)
+        try {
+            const response = await fetch(`http://localhost:8080/login?username=${creds.username}&password=${creds.password}`, {signal: controller.signal})
 
-        const response = await fetch(`http://localhost:8080/login?username=${creds.username}&password=${creds.password}`, { signal: controller.signal })
 
-        if (response.ok)
-            dispatch({type: ON_LOGIN_PASSED})
-        else
+            if (response.ok)
+                dispatch({type: ON_LOGIN_PASSED})
+        } catch(e) {
             dispatch({type: ON_LOGIN_FAILED})
+        }
     }
 }
