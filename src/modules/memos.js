@@ -14,7 +14,8 @@ const initState = {
     memoList: [],
     selectedMemo: null,
     loginPending: false,
-    loginFailed: false
+    loginFailed: false,
+    token: null,
 }
 
 export function reducer(state = initState, action) {
@@ -30,7 +31,8 @@ export function reducer(state = initState, action) {
                 ...state,
                 isLoggedIn: true,
                 loginPending: false,
-                loginFailed: false
+                loginFailed: false,
+                token: action.token,
             }
 
         case ON_LOGIN_FAILED:
@@ -79,19 +81,16 @@ export function reducer(state = initState, action) {
 
 // side effects - asynchronous actions
 export function initiateLogin(creds) {
-    return async function sideEffect(dispatch) {
+    return async function sideEffect(dispatch, getState) {
         dispatch({type: ON_LOGIN_REQUEST}) // notify the fe code that we are waiting to see if our creds were correct
 
-        const controller = new AbortController()
-
-        // 5 second timeout:
-        const timeoutId = setTimeout(() => controller.abort(), 5000)
         try {
-            const response = await fetch(`http://localhost:8080/login?username=${creds.username}&password=${creds.password}`, {signal: controller.signal})
+            const response = await fetch(`http://localhost:8080/login?username=${creds.username}&password=${creds.password}`)
 
-
-            if (response.ok)
-                dispatch({type: ON_LOGIN_PASSED})
+            if (response.ok) {
+                const token = await response.json();
+                dispatch({type: ON_LOGIN_PASSED, token: token});
+            }
         } catch(e) {
             dispatch({type: ON_LOGIN_FAILED})
         }
